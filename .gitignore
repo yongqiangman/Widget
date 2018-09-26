@@ -1,0 +1,14 @@
+build/
+app/build/
+widget/build/
+.idea/
+
+*.iml
+
+# Gradle files
+.gradle/
+
+local.properties
+
+app/src/androidTest/
+app/src/test/

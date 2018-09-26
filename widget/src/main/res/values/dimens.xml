@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="yqman_widget_dialog_main_padding_top">30dp</dimen>
+    <dimen name="yqman_widget_dialog_main_padding_bottom">30dp</dimen>
+    <dimen name="yqman_widget_dialog_main_margin_left">40dp</dimen>
+    <dimen name="yqman_widget_dialog_main_margin_right">40dp</dimen>
+    <dimen name="yqman_widget_dialog_main_margin_top">15dp</dimen>
+    <dimen name="yqman_widget_dialog_main_margin_bottom">20dp</dimen>
+    <dimen name="yqman_widget_dialog_item_margin_bottom">23dp</dimen>
+    <dimen name="yqman_widget_dialog_item_margin_top">7dp</dimen>
+    <dimen name="yqman_widget_dialog_item_padding_bottom">15dp</dimen>
+    <dimen name="yqman_widget_dialog_item_padding_top">15dp</dimen>
+    <dimen name="yqman_widget_dialog_item_text_padding">10dp</dimen>
+    <dimen name="yqman_widget_dialog_item_text_padding_left">10dp</dimen>
+    <dimen name="yqman_widget_dialog_item_text_padding_right">10dp</dimen>
+    <dimen name="yqman_widget_dialog_content_padding_left">20dp</dimen>
+    <dimen name="yqman_widget_dialog_content_padding_right">20dp</dimen>
+    <dimen name="yqman_widget_text_size_middle">16sp</dimen>
+    <dimen name="yqman_widget_text_size_large">18sp</dimen>
+    <dimen name="yqman_widget_text_size_small">14sp</dimen>
+    <dimen name="yqman_widget_radius_normal">12dp</dimen>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="yqman_widget_dialog_title">#FF333333</color>
+    <color name="yqman_widget_dialog_content">#FF666666</color>
+
+    <color name="yqman_widget_button_pressed_color">#19999999</color>
+    <color name="yqman_widget_dark_white">#eaedf0</color>
+    <color name="yqman_widget_blue">#ff3995e3</color>
+    <color name="yqman_widget_gray">#ffb0b0b0</color>
+    <color name="yqman_widget_white">#ffffffff</color>
+    <color name="yqman_widget_button_color_dialog">#eaedf0</color>
+</resources>

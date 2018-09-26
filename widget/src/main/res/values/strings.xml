@@ -1,0 +1,6 @@
+<resources>
+    <string name="yqman_widget_app_name">Wdiget</string>
+    <string name="yqman_widget_cancel">取消</string>
+    <string name="yqman_widget_ok">确定</string>
+    <string name="yqman_widget_know_it">知道了</string>
+</resources>

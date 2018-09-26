@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="YQMAN"/>
+    <!-- 统一的字体 -->
+    <style name="YQMAN.TextAppearance"/>
+
+    <style name="YQMAN.TextAppearance.Large">
+        <item name="android:textSize">@dimen/yqman_widget_text_size_large</item>
+    </style>
+
+    <style name="YQMAN.TextAppearance.Large.Blue">
+        <item name="android:textColor">@color/yqman_widget_blue</item>
+    </style>
+
+    <style name="YQMAN.TextAppearance.Small">
+        <item name="android:textSize">@dimen/yqman_widget_text_size_small</item>
+    </style>
+
+    <style name="YQMAN.TextAppearance.Small.Gray">
+        <item name="android:textColor">@color/yqman_widget_gray</item>
+    </style>
+
+    <style name="YQMAN.CustomDialog">
+    </style>
+
+    <style name="YQMAN.CustomDialog.Button">
+        <item name="android:textColor">@color/yqman_widget_button_color_dialog</item>
+        <item name="android:textSize">@dimen/yqman_widget_text_size_middle</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="YQMAN.CustomDialog.Animation">
+        <item name="android:windowEnterAnimation">@anim/yqman_widget_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/yqman_widget_scale_out</item>
+    </style>
+
+    <!-- 对话框样式 -->
+    <style name="YQMAN.CustomDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>

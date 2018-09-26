@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalDotView">
+        <attr name="yqman_widget_dotSize" format="dimension"/>
+        <attr name="yqman_widget_dotBackgroundSelector" format="reference"/>
+        <attr name="yqman_widget_dotMargin" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalScrollPage">
+        <attr name="yqman_widget_rollingFrequencySecond" format="integer"/>
+    </declare-styleable>
+</resources>
