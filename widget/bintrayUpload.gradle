@@ -3,8 +3,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 version = "0.0.0"  // 项目版本号，每次都要修改
 
-def siteUrl = 'https://github.com/ReactiveX/RxJava'      // 项目的主页
-def gitUrl = 'https://github.com/ReactiveX/RxJava.git'   // Git仓库的url
+def siteUrl = 'https://github.com/yongqiangman/Widget'      // 项目的主页
+def gitUrl = 'https://github.com/yongqiangman/Widget.git'   // Git仓库的url
 def libName = "Widget" // 对应之前Repository创建的widget package
 def libDescription = 'Widget For Android'
 def docTitle = "WidgetDoc"
