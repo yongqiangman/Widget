@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.yqman.wdiget.HorizontalScrollPage
+            android:id="@+id/scroll_page"
+            app:yqman_widget_rollingFrequencySecond="2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" >
+    </com.yqman.wdiget.HorizontalScrollPage>
+    <com.yqman.wdiget.HorizontalDotView
+            android:layout_marginTop="130dp"
+            android:id="@+id/dot_page"
+            app:yqman_widget_dotMargin="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    </com.yqman.wdiget.HorizontalDotView>
+</RelativeLayout>
