@@ -21,6 +21,9 @@
     <color name="yqman_widget_dark_white">#eaedf0</color>
     <color name="yqman_widget_blue">#ff3995e3</color>
     <color name="yqman_widget_gray">#ffb0b0b0</color>
+    <color name="yqman_widget_dark">#ff000000</color>
     <color name="yqman_widget_white">#ffffffff</color>
     <color name="yqman_widget_button_color_dialog">#eaedf0</color>
+
+    <color name="yqman_widget_color_footer_line">#D1D1D1</color>
 </resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             android:paddingTop="14dp"
+                                             android:paddingBottom="14dp"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+            android:id="@+id/end_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_more_data"
+            android:textColor="@color/yqman_widget_gray"
+            android:textSize="@dimen/yqman_widget_text_size_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+            android:layout_width="10dp"
+            android:layout_height="1dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/yqman_widget_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/end_info"
+            app:layout_constraintRight_toLeftOf="@+id/end_info"
+            app:layout_constraintTop_toTopOf="@+id/end_info"/>
+
+    <View
+            android:layout_width="10dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/yqman_widget_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/end_info"
+            app:layout_constraintLeft_toRightOf="@+id/end_info"
+            app:layout_constraintTop_toTopOf="@+id/end_info"/>
+</android.support.constraint.ConstraintLayout>

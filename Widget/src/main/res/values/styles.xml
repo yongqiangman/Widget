@@ -56,4 +56,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+    <style name="YQMAN.Progress_style" parent="android:style/Widget.ProgressBar" >
+        <item name="android:indeterminateDrawable">@drawable/yqman_widget_progressbar_frame_by_frame_animation</item>
+        <item name="android:minWidth">30dp</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxWidth">30dp</item>
+        <item name="android:maxHeight">30dp</item>
+    </style>
 </resources>

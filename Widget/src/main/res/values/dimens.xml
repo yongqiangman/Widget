@@ -33,4 +33,9 @@
     <dimen name="yqman_widget_text_size_large">18sp</dimen>
     <dimen name="yqman_widget_text_size_small">14sp</dimen>
     <dimen name="yqman_widget_radius_normal">12dp</dimen>
+
+    <dimen name="yqman_widget_padding_normal">7dp</dimen>
+    <dimen name="yqman_widget_margin_left_right_normal">7dp</dimen>
+    <dimen name="yqman_widget_margin_top_normal">7dp</dimen>
+
 </resources>

@@ -14,4 +14,8 @@
 
 <resources>
     <string name="app_name">WidgetApp</string>
+    <string name="head_str">head Item</string>
+    <string name="footer_str">foot Item</string>
+    <string name="no_more_data">没有更多数据了</string>
+
 </resources>

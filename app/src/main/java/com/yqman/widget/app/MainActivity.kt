@@ -17,17 +17,29 @@ package com.yqman.widget.app
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
 import com.squareup.picasso.Picasso
 import com.yqman.wdiget.HorizontalDotView
 import com.yqman.wdiget.HorizontalScrollPage
 import com.yqman.wdiget.ToastHelper
-import java.util.*
+import com.yqman.wdiget.recyclerView.item.SimpleLoadMoreFooter
+import com.yqman.wdiget.recyclerView.item.SimpleRefreshHeader
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.collections.ArrayList
+
+
 
 class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initBanner()
+        initRecyclerView()
+    }
+
+    private fun initBanner() {
         val view : HorizontalScrollPage = findViewById(R.id.scroll_page)
         val dot : HorizontalDotView = findViewById(R.id.dot_page)
         view.setItemClickListener(this)
@@ -49,6 +61,45 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
             view.setImageResource(list)
         }, 20_000)
         view.registerLifecycleObserver(this)
+    }
+
+    private fun initRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = SimpleAdapter().apply {
+            refreshHeader = SimpleRefreshHeader(this@MainActivity).apply {
+                setRefreshListener {
+                    ToastHelper.showToast(this@MainActivity, "下拉拉刷新")
+                    Handler().postDelayed(Runnable {
+                        completeRefresh()
+                    }, 3000)
+                }
+            }
+            loadMoreFooter = SimpleLoadMoreFooter(this@MainActivity).apply {
+                setLoadMoreListener {
+                    ToastHelper.showToast(this@MainActivity, "上拉刷新")
+                }
+            }
+            setNoMoreFooter(LayoutInflater.from(this@MainActivity).inflate(R.layout.no_more_data, null))
+            addHeaderView(LayoutInflater.from(this@MainActivity).inflate(R.layout.simple_head, null))
+            addFooterView(LayoutInflater.from(this@MainActivity).inflate(R.layout.simple_footer, null))
+            enableLoadMoreEvent(true)
+            data = ArrayList<Item>().apply {
+                add(Item("item 1"))
+                add(Item("item 2"))
+                add(Item("item 3"))
+                add(Item("item 4"))
+                add(Item("item 5"))
+                add(Item("item 6"))
+                add(Item("item 7"))
+                add(Item("item 8"))
+                add(Item("item 9"))
+                add(Item("item 10"))
+                add(Item("item 11"))
+            }
+            setItemClickListener {
+                ToastHelper.showToast(this@MainActivity, "item ${it.name}")
+            }
+        }
     }
 
     override fun onClickItem(pos: Int) {

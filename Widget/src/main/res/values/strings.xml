@@ -13,8 +13,11 @@
   -->
 
 <resources>
-    <string name="yqman_widget_app_name">Wdiget</string>
+    <string name="yqman_widget_app_name">Widget</string>
     <string name="yqman_widget_cancel">取消</string>
     <string name="yqman_widget_ok">确定</string>
     <string name="yqman_widget_know_it">知道了</string>
+    <string name="yqman_widget_release_refresh">释放刷新</string>
+    <string name="yqman_widget_pull_refresh">下拉刷新</string>
+    <string name="yqman_widget_loading">加载中&#8230;</string>
 </resources>
