@@ -22,5 +22,6 @@
 
     <declare-styleable name="HorizontalScrollPage">
         <attr name="yqman_widget_rollingFrequencySecond" format="integer"/>
+        <attr name="yqman_widget_enableZoomImage" format="boolean"/>
     </declare-styleable>
 </resources>

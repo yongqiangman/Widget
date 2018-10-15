@@ -36,7 +36,7 @@ import android.widget.LinearLayout;
 
 public class HorizontalScrollPage extends FrameLayout implements GenericLifecycleObserver {
     private static final int POLL_FLAG = 99;
-    private static final int DEFAULT_DELAY_TIME_SECOND = 5;
+    private static final int DEFAULT_DELAY_TIME_SECOND = -1;
 
     private ViewPager mViewPager;
     private OnItemClickedListener mClickListener;
@@ -44,9 +44,13 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
     private ArrayList<String> mImageResource;
     private int mPrePosition = 0;
     private PollHandler mHandler = new PollHandler();
-    private Long mRollingFrequency;
+    private int mRollingFrequency;
     private ImageLoader mImageLoader;
     private boolean mCanPollPage = false;
+    /**
+     * 是否支持ImageView的放缩
+     */
+    private boolean mEnableZoomImage = false;
 
     public HorizontalScrollPage(Context context) {
         this(context, null);
@@ -56,7 +60,9 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
         super(context, attributes);
         TypedArray array = context.obtainStyledAttributes(attributes, R.styleable.HorizontalScrollPage);
         mRollingFrequency = array.getInt(R.styleable.HorizontalScrollPage_yqman_widget_rollingFrequencySecond,
-                DEFAULT_DELAY_TIME_SECOND) * (1000L);
+                DEFAULT_DELAY_TIME_SECOND);
+        mEnableZoomImage = array.getBoolean(R.styleable.HorizontalScrollPage_yqman_widget_enableZoomImage,
+                false);
         array.recycle();
         mViewPager = new ViewPager(context);
         mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -84,9 +90,12 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
     }
 
     private void startSinglePolling() {
-        if (mCanPollPage && mImageResource != null && !mImageResource.isEmpty()) {
+        if (mRollingFrequency != DEFAULT_DELAY_TIME_SECOND
+                && mCanPollPage
+                && mImageResource != null
+                && !mImageResource.isEmpty()) {
             if (!mHandler.hasMessages(POLL_FLAG)) {
-                mHandler.sendMessageDelayed(mHandler.obtainMessage(POLL_FLAG, this), mRollingFrequency);
+                mHandler.sendMessageDelayed(mHandler.obtainMessage(POLL_FLAG, this), mRollingFrequency * 1000L);
             }
         }
     }
@@ -97,6 +106,10 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
         }
     }
 
+    /**
+     * 遇到pointerIndex out of range问题，
+     * 参考https://kaywu.xyz/2016/09/25/pointer-index-out-of-range/
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev != null) {
@@ -107,7 +120,12 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
                 startSinglePolling();
             }
         }
-        return super.dispatchTouchEvent(ev);
+        try {
+            return super.dispatchTouchEvent(ev);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     private void pollUpdateView() {
@@ -172,7 +190,12 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
         }
 
         private ImageView createImageView(final int pos) {
-            ImageView imageView = new ImageView(getContext());
+            ImageView imageView;
+            if (mEnableZoomImage) {
+                imageView = new ZoomImageView(getContext());
+            } else {
+                imageView = new ImageView(getContext());
+            }
             imageView.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
             imageView.setOnClickListener(new OnClickListener() {
@@ -183,7 +206,7 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
                     }
                 }
             });
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             return imageView;
         }
     }

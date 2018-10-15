@@ -224,7 +224,7 @@ public abstract class BaseRecyclerViewAdapter<M>
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    if (getItemViewType(position) > 0) {
+                    if (getItemViewType(position) >= 0) {
                         return 0;
                     } else {
                         return gridLayoutManager.getSpanCount();
@@ -253,7 +253,7 @@ public abstract class BaseRecyclerViewAdapter<M>
     @Override
     public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
         int position = holder.getAdapterPosition();
-        if (getItemViewType(position) > 0) {
+        if (getItemViewType(position) >= 0) {
             position = position - mHeaderViews.size();
             onChildrenViewDetachedFromWindow(holder, position);
         }

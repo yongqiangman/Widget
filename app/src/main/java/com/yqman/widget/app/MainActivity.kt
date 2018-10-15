@@ -24,6 +24,8 @@ import com.squareup.picasso.Picasso
 import com.yqman.wdiget.HorizontalDotView
 import com.yqman.wdiget.HorizontalScrollPage
 import com.yqman.wdiget.ToastHelper
+import com.yqman.wdiget.recyclerView.item.ItemDividerDecoration
+import com.yqman.wdiget.recyclerView.item.ItemLineDecoration
 import com.yqman.wdiget.recyclerView.item.SimpleLoadMoreFooter
 import com.yqman.wdiget.recyclerView.item.SimpleRefreshHeader
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,17 +56,20 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
             add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534504536037&di=685e4c0cb8cbe41d4c6bc89a92267792&imgtype=0&src=http%3A%2F%2Fwww.wallcoo.com%2Fflower%2FAmazing_Color_Flowers_2560x1600_III%2Fwallpapers%2F2560x1600%2FFlowers_Wallpapers_91.jpg")
         }
         view.setImageResource(list)
-        Handler().postDelayed({view.setImageResource(ArrayList())}, 10_000)
+        Handler().postDelayed({view.setImageResource(ArrayList())}, 2_000)
         Handler().postDelayed({
             list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534504536036&di=0019339b4e285e1a3d279ab9efdc1f36&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170324%2F663c85eae74f4320a3e382f03af76d52_th.jpg")
             list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534504536036&di=75ef000500890fd5d7c37d0c23e31436&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fe%2F58fb005766f6b.jpg")
             view.setImageResource(list)
-        }, 20_000)
+        }, 5_000)
         view.registerLifecycleObserver(this)
     }
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.itemAnimator = ItemDisplayAnimation()
+        recyclerView.addItemDecoration(ItemDividerDecoration(30))
+        recyclerView.addItemDecoration(ItemLineDecoration(this))
         recyclerView.adapter = SimpleAdapter().apply {
             refreshHeader = SimpleRefreshHeader(this@MainActivity).apply {
                 setRefreshListener {

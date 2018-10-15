@@ -20,6 +20,7 @@ package com.yqman.wdiget;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -42,7 +43,7 @@ public class CustomDialog implements View.OnClickListener {
     private Dialog mDialog;
     private FrameLayout mCustomLayout;
 
-    private Activity mActivity;
+    private Context mContext;
     private View mTitleContentView;
     private TextView mTitleTV;
     private TextView mSubTitleTV;
@@ -88,7 +89,7 @@ public class CustomDialog implements View.OnClickListener {
     }
 
     private void init() {
-        mDialog = new Dialog(mActivity, R.style.YQMAN_CustomDialogTheme);
+        mDialog = new Dialog(mContext, R.style.YQMAN_CustomDialogTheme);
         initDialogView();
         // 设置对话框内容
         if (isNotEmptyString(mTitle)) {
@@ -128,7 +129,7 @@ public class CustomDialog implements View.OnClickListener {
 
         if (mCustomViewId != -1) { // 默认-1
             mCustomLayout.setVisibility(View.VISIBLE);
-            View customView = LayoutInflater.from(mActivity).inflate(mCustomViewId, mCustomLayout);
+            View customView = LayoutInflater.from(mContext).inflate(mCustomViewId, mCustomLayout);
             if (mCreateCustomViewListener != null) {
                 mCreateCustomViewListener.onCreate(customView);
             }
@@ -163,7 +164,7 @@ public class CustomDialog implements View.OnClickListener {
 
     private void initDialogView() {
         View contentView;
-        contentView = LayoutInflater.from(mActivity).inflate(R.layout.yqman_widget_custom_dialog, null);
+        contentView = LayoutInflater.from(mContext).inflate(R.layout.yqman_widget_custom_dialog, null);
 
         mTitleContentView = contentView.findViewById(R.id.yqman_widget_title_content);
         mTitleTV = (TextView) contentView.findViewById(R.id.title);
@@ -188,7 +189,7 @@ public class CustomDialog implements View.OnClickListener {
         mDialog.setContentView(contentView);
         // 设置对话框属性
         ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
-        layoutParams.width = mActivity.getResources().getDisplayMetrics().widthPixels;
+        layoutParams.width = mContext.getResources().getDisplayMetrics().widthPixels;
         contentView.setLayoutParams(layoutParams);
         if (mDialog.getWindow() != null) {
             mDialog.getWindow().setGravity(Gravity.CENTER);
@@ -254,13 +255,8 @@ public class CustomDialog implements View.OnClickListener {
     public static class Builder {
         private CustomDialog mEvanDialog = new CustomDialog();
 
-        public Builder(Activity activity) {
-            mEvanDialog.mActivity = activity;
-        }
-
-        public Builder setActivity(Activity activity) {
-            mEvanDialog.mActivity = activity;
-            return this;
+        public Builder(Context context) {
+            mEvanDialog.mContext = context;
         }
 
         /**
@@ -272,7 +268,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setTitle(int resId) {
-            mEvanDialog.mTitle = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mTitle = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -282,7 +278,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setSubTitle(int resId) {
-            mEvanDialog.mSubTitle = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mSubTitle = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -292,7 +288,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setContentText(int resId) {
-            mEvanDialog.mContentText = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mContentText = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -302,7 +298,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setBottomText(int resId) {
-            mEvanDialog.mBottomText = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mBottomText = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -312,7 +308,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setCancelText(int resId) {
-            mEvanDialog.mCancelText = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mCancelText = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -322,7 +318,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setConfirmText(int resId) {
-            mEvanDialog.mConfirmText = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mConfirmText = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 
@@ -332,7 +328,7 @@ public class CustomDialog implements View.OnClickListener {
         }
 
         public Builder setSingleConfirmText(int resId) {
-            mEvanDialog.mSingleConfirmText = mEvanDialog.mActivity.getResources().getString(resId);
+            mEvanDialog.mSingleConfirmText = mEvanDialog.mContext.getResources().getString(resId);
             return this;
         }
 

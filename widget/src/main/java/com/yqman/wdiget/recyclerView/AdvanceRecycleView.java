@@ -29,10 +29,10 @@ import android.view.View;
  */
 public class AdvanceRecycleView extends RecyclerView {
     private static final float Y_INIT_POSITION = -1;
-    private float yPosition = Y_INIT_POSITION;
-    private BaseRefreshHeader refreshHeader;
-    private BaseLoadMoreFooter loadMoreFooter;
-    private final int screen_height;
+    private float mYInitPosition = Y_INIT_POSITION;
+    private BaseRefreshHeader mRefreshHeader;
+    private BaseLoadMoreFooter mLoadMoreFooter;
+    private final int mScreenHeight;
 
     public AdvanceRecycleView(Context context) {
         this(context, null);
@@ -44,28 +44,28 @@ public class AdvanceRecycleView extends RecyclerView {
 
     public AdvanceRecycleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        screen_height = context.getResources().getDisplayMetrics().heightPixels;
+        mScreenHeight = context.getResources().getDisplayMetrics().heightPixels;
     }
 
     @Override
     public void onScrollStateChanged(int state) {
         switch (state) {
             case RecyclerView.SCROLL_STATE_IDLE: /*没有滑动*/
-                if (refreshHeader != null || getRefreshHeader()) {
-                    refreshHeader.setChangeEnable();
+                if (mRefreshHeader != null || getRefreshHeader()) {
+                    mRefreshHeader.setChangeEnable();
                 }
                 if (isFooterView()) {
-                    loadMoreFooter.startLoadMore();
+                    mLoadMoreFooter.startLoadMore();
                 }
                 break;
             case RecyclerView.SCROLL_STATE_DRAGGING: /*滑动状态，手指在屏幕*/
-                if (refreshHeader != null || getRefreshHeader()) {
-                    refreshHeader.setChangeEnable();
+                if (mRefreshHeader != null || getRefreshHeader()) {
+                    mRefreshHeader.setChangeEnable();
                 }
                 break;
             case RecyclerView.SCROLL_STATE_SETTLING: /*滑动状态，手指不在屏幕*/
-                if (refreshHeader != null || getRefreshHeader()) {
-                    refreshHeader.setChangeUnable();
+                if (mRefreshHeader != null || getRefreshHeader()) {
+                    mRefreshHeader.setChangeUnable();
                 }
                 break;
             default:
@@ -80,18 +80,18 @@ public class AdvanceRecycleView extends RecyclerView {
     private boolean isFooterView() {
         Adapter adapter = getAdapter();
         if (adapter instanceof BaseRecyclerViewAdapter) {
-            loadMoreFooter = ((BaseRecyclerViewAdapter) adapter).getLoadMoreFooter();
-            if (loadMoreFooter == null) {
+            mLoadMoreFooter = ((BaseRecyclerViewAdapter) adapter).getLoadMoreFooter();
+            if (mLoadMoreFooter == null) {
                 return false;
             }
-            if (loadMoreFooter.getView().getParent() == null) {
+            if (mLoadMoreFooter.getView().getParent() == null) {
                 return false;
             }
             int[] position = new int[2];
             //两个int存的是左上角的坐标
-            loadMoreFooter.getView().getLocationInWindow(position);
+            mLoadMoreFooter.getView().getLocationInWindow(position);
             //针对item总的高度还不足以能够填充整个屏幕则loadMore不显示
-            return screen_height - position[1] <= loadMoreFooter.getView().getHeight();
+            return mScreenHeight - position[1] <= mLoadMoreFooter.getView().getHeight();
         }
         return false;
     }
@@ -99,8 +99,8 @@ public class AdvanceRecycleView extends RecyclerView {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (refreshHeader != null || getRefreshHeader()) {
-                refreshHeader.setChangeEnable();
+            if (mRefreshHeader != null || getRefreshHeader()) {
+                mRefreshHeader.setChangeEnable();
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -108,32 +108,32 @@ public class AdvanceRecycleView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (yPosition == Y_INIT_POSITION) {
-            yPosition = e.getRawY();//当前触摸事件所处的位置
+        if (mYInitPosition == Y_INIT_POSITION) {
+            mYInitPosition = e.getRawY();//当前触摸事件所处的位置
         }
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                yPosition = e.getRawY();
-                if (refreshHeader != null || getRefreshHeader()) {
-                    refreshHeader.setChangeEnable();
+                mYInitPosition = e.getRawY();
+                if (mRefreshHeader != null || getRefreshHeader()) {
+                    mRefreshHeader.setChangeEnable();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                float increasedY = e.getRawY() - yPosition;
-                yPosition = e.getRawY();
+                float increasedY = e.getRawY() - mYInitPosition;
+                mYInitPosition = e.getRawY();
                 if (isTopView()) {
-                    if (refreshHeader.moveTo(increasedY)) {
+                    if (mRefreshHeader.moveTo(increasedY)) {
                         return true;
                     }
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                yPosition = -1;
+                mYInitPosition = -1;
                 if (isTopView()) {
-                    if (refreshHeader.getState() == BaseRefreshHeader.SIMPLE) {
-                        refreshHeader.initState();
+                    if (mRefreshHeader.getState() == BaseRefreshHeader.SIMPLE) {
+                        mRefreshHeader.initState();
                     } else {
-                        refreshHeader.startRefresh();
+                        mRefreshHeader.startRefresh();
                     }
                 }
             default:
@@ -150,11 +150,11 @@ public class AdvanceRecycleView extends RecyclerView {
     private boolean isTopView() {
         Adapter adapter = getAdapter();
         if (adapter instanceof BaseRecyclerViewAdapter) {
-            refreshHeader = ((BaseRecyclerViewAdapter) adapter).getRefreshHeader();
-            if (refreshHeader == null) {
+            mRefreshHeader = ((BaseRecyclerViewAdapter) adapter).getRefreshHeader();
+            if (mRefreshHeader == null) {
                 return false;
             }
-            View view = refreshHeader.getView();
+            View view = mRefreshHeader.getView();
             return view.getParent() != null;
         }
         return false;
@@ -163,8 +163,8 @@ public class AdvanceRecycleView extends RecyclerView {
     private boolean getRefreshHeader() {
         Adapter adapter = getAdapter();
         if (adapter instanceof BaseRecyclerViewAdapter) {
-            refreshHeader = ((BaseRecyclerViewAdapter) adapter).getRefreshHeader();
-            if (refreshHeader == null) {
+            mRefreshHeader = ((BaseRecyclerViewAdapter) adapter).getRefreshHeader();
+            if (mRefreshHeader == null) {
                 return false;
             }
             return true;

@@ -49,6 +49,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'exifinterface'
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.0'
 }
 
 repositories {
