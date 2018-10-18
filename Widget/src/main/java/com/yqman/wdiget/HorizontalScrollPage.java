@@ -37,6 +37,8 @@ import android.widget.LinearLayout;
 public class HorizontalScrollPage extends FrameLayout implements GenericLifecycleObserver {
     private static final int POLL_FLAG = 99;
     private static final int DEFAULT_DELAY_TIME_SECOND = -1;
+    private static final int MAX_ITEM_COUNT = Integer.MAX_VALUE;
+    private static final int OFFSET_VALUE = 100;
 
     private ViewPager mViewPager;
     private OnItemClickedListener mClickListener;
@@ -51,6 +53,10 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
      * 是否支持ImageView的放缩
      */
     private boolean mEnableZoomImage = false;
+    /**
+     * 是否支持无限循环
+     */
+    private boolean mEnableInfiniteSliding = true;
 
     public HorizontalScrollPage(Context context) {
         this(context, null);
@@ -63,6 +69,8 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
                 DEFAULT_DELAY_TIME_SECOND);
         mEnableZoomImage = array.getBoolean(R.styleable.HorizontalScrollPage_yqman_widget_enableZoomImage,
                 false);
+        mEnableInfiniteSliding = array.getBoolean(R.styleable.HorizontalScrollPage_yqman_widget_enableInfiniteSliding,
+                true);
         array.recycle();
         mViewPager = new ViewPager(context);
         mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -74,6 +82,10 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
     public void setImageResource(ArrayList<String> resource) {
         mImageResource = resource;
         initData();
+        final PagerAdapter adapter = mViewPager.getAdapter();
+        if (adapter != null && adapter.getCount() == MAX_ITEM_COUNT) {
+            mViewPager.setCurrentItem(mImageResource.size() * OFFSET_VALUE);
+        }
         startSinglePolling();
     }
 
@@ -129,7 +141,16 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
     }
 
     private void pollUpdateView() {
-        mViewPager.setCurrentItem(mPrePosition + 1);
+        final PagerAdapter adapter = mViewPager.getAdapter();
+        if (adapter == null || adapter.getCount() < 0) {
+            return;
+        }
+        final int nextPosition = mPrePosition + 1;
+        if (nextPosition >= adapter.getCount()) {
+            mViewPager.setCurrentItem(0);
+        } else {
+            mViewPager.setCurrentItem(nextPosition);
+        }
         startSinglePolling();
     }
 
@@ -164,13 +185,17 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
          */
         @Override
         public int getCount() {
-            if (mImageResource == null || mImageResource.size() == 0) {
-                return 0;
+            final int size;
+            if (mImageResource == null) {
+                size = 0;
+            } else {
+                size = mImageResource.size();
             }
-            if (mImageResource.size() == 1) {
-                return 1;
+            if (size > 1 && mEnableInfiniteSliding) {
+                return MAX_ITEM_COUNT;
+            } else {
+                return size;
             }
-            return Integer.MAX_VALUE;
         }
 
         @NonNull
@@ -219,7 +244,7 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
 
         @Override
         public void onPageSelected(int position) {
-            if (mSelectedListener != null) {
+            if (mSelectedListener != null && mImageResource.size() != 0) {
                 int realCurrentPos = (position % mImageResource.size());
                 mSelectedListener.onItemSelect(realCurrentPos, mImageResource.size());
             }
