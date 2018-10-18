@@ -53,7 +53,7 @@ public abstract class BaseRecyclerViewAdapter<M>
     protected ItemClickListener<M> mItemClickListener;
 
     public interface ItemClickListener<E> {
-        void onItemClick(@NonNull E item);
+        void onItemClick(@NonNull E item, int position);
     }
 
     public void setItemClickListener(ItemClickListener<M> itemClickListener) {

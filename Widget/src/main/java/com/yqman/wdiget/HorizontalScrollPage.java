@@ -76,24 +76,41 @@ public class HorizontalScrollPage extends FrameLayout implements GenericLifecycl
         mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         addView(mViewPager);
         mViewPager.addOnPageChangeListener(new ScrollPagerChangeListener());
-        initData();
+        initData(0);
     }
 
-    public void setImageResource(ArrayList<String> resource) {
+    public void setImageResource(int initPosition, ArrayList<String> resource) {
         mImageResource = resource;
-        initData();
-        final PagerAdapter adapter = mViewPager.getAdapter();
-        if (adapter != null && adapter.getCount() == MAX_ITEM_COUNT) {
-            mViewPager.setCurrentItem(mImageResource.size() * OFFSET_VALUE);
+        final int imgSize;
+        if (resource == null) {
+            imgSize = 0;
+        } else {
+            imgSize = resource.size();
         }
+        if (initPosition < 0 || initPosition >= imgSize) {
+            initPosition = 0;
+        }
+        initData(initPosition);
         startSinglePolling();
     }
 
-    private void initData() {
+    public void setImageResource(ArrayList<String> resource) {
+        setImageResource(0, resource);
+    }
+
+    private void initData(int initPosition) {
         mViewPager.setAdapter(new Adapter());
-        mPrePosition = 0;
+        mPrePosition = initPosition;
         if (mSelectedListener != null) {
-            mSelectedListener.onItemSelect(0, mImageResource.size());
+            mSelectedListener.onItemSelect(initPosition, mImageResource.size());
+        }
+        final PagerAdapter adapter = mViewPager.getAdapter();
+        if (adapter != null && adapter.getCount() > 0) {
+            if (adapter.getCount() == MAX_ITEM_COUNT) {
+                mViewPager.setCurrentItem(mImageResource.size() * OFFSET_VALUE + initPosition);
+            } else {
+                mViewPager.setCurrentItem(initPosition);
+            }
         }
     }
 

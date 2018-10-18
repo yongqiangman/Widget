@@ -101,9 +101,7 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
                 add(Item("item 10"))
                 add(Item("item 11"))
             }
-            setItemClickListener {
-                ToastHelper.showToast(this@MainActivity, "item ${it.name}")
-            }
+            setItemClickListener { item, position ->  ToastHelper.showToast(this@MainActivity, "item ${item.name}")}
         }
     }
 

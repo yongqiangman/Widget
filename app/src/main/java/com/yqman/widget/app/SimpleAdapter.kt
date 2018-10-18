@@ -47,7 +47,7 @@ class SimpleAdapter: BaseRecyclerViewAdapter<Item>() {
             holder.textView.text = value?.name
             holder.itemView.setOnClickListener {
                 if (value != null) {
-                    mItemClickListener?.onItemClick(value)
+                    mItemClickListener?.onItemClick(value, position)
                 }
             }
         }
