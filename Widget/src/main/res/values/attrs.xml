@@ -25,4 +25,11 @@
         <attr name="yqman_widget_enableZoomImage" format="boolean"/>
         <attr name="yqman_widget_enableInfiniteSliding" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="CollapsibleLayout">
+        <attr name="yqman_widget_content_layout" format="reference"/>
+        <attr name="yqman_widget_expanded_title_layout" format="reference"/>
+        <attr name="yqman_widget_collapsed_title_layout" format="reference"/>
+        <attr name="yqman_widget_content_scrim_resource" format="reference"/>
+    </declare-styleable>
 </resources>

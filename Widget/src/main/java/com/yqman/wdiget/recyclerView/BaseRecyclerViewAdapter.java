@@ -168,7 +168,7 @@ public abstract class BaseRecyclerViewAdapter<M>
             int footerPosition = position - (getChildrenItemCount() + mHeaderViews.size());
             return FOOTER_TYPE_FLAG + footerPosition;
         }
-        return getItemChildrenViewType(position);
+        return getItemChildrenViewType(position - mHeaderViews.size());
     }
 
     /**

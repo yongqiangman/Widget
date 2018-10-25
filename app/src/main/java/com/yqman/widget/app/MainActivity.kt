@@ -27,8 +27,10 @@ import com.yqman.wdiget.ToastHelper
 import com.yqman.wdiget.recyclerView.item.ItemDividerDecoration
 import com.yqman.wdiget.recyclerView.item.ItemLineDecoration
 import com.yqman.wdiget.recyclerView.item.SimpleLoadMoreFooter
-import com.yqman.wdiget.recyclerView.item.SimpleRefreshHeader
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_content.*
+import kotlinx.android.synthetic.main.title_bar_collapsed_main.*
+import kotlinx.android.synthetic.main.title_bar_expanded_main.*
 import kotlin.collections.ArrayList
 
 
@@ -63,6 +65,7 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
             view.setImageResource(list)
         }, 5_000)
         view.registerLifecycleObserver(this)
+        initTitleBar()
     }
 
     private fun initRecyclerView() {
@@ -71,14 +74,6 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
         recyclerView.addItemDecoration(ItemDividerDecoration(30))
         recyclerView.addItemDecoration(ItemLineDecoration(this))
         recyclerView.adapter = SimpleAdapter().apply {
-            refreshHeader = SimpleRefreshHeader(this@MainActivity).apply {
-                setRefreshListener {
-                    ToastHelper.showToast(this@MainActivity, "下拉拉刷新")
-                    Handler().postDelayed(Runnable {
-                        completeRefresh()
-                    }, 3000)
-                }
-            }
             loadMoreFooter = SimpleLoadMoreFooter(this@MainActivity).apply {
                 setLoadMoreListener {
                     ToastHelper.showToast(this@MainActivity, "上拉刷新")
@@ -108,5 +103,14 @@ class MainActivity: AppCompatActivity(), HorizontalScrollPage.OnItemClickedListe
     override fun onClickItem(pos: Int) {
         Log.d("MainActivity", "pos $pos")
         ToastHelper.showToast(this, "index$pos")
+    }
+
+    private fun initTitleBar() {
+        val url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534504536036&di=75ef000500890fd5d7c37d0c23e31436&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fe%2F58fb005766f6b.jpg"
+        Picasso.get().load(url).into(title_expanded_img)
+        collapsibleLayout_main.setOnCollapsibleListener {
+            Log.d("MainActivity", "ratio $it")
+            title_collapsed_content.alpha = it
+        }
     }
 }

@@ -12,29 +12,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.yqman.wdiget.HorizontalScrollPage
-            android:id="@+id/scroll_page"
-            app:yqman_widget_rollingFrequencySecond="2"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" >
-    </com.yqman.wdiget.HorizontalScrollPage>
-    <com.yqman.wdiget.HorizontalDotView
-            android:layout_marginTop="130dp"
-            android:id="@+id/dot_page"
-            app:yqman_widget_dotMargin="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    </com.yqman.wdiget.HorizontalDotView>
-    <com.yqman.wdiget.recyclerView.AdvanceRecycleView
-            android:id="@+id/recyclerView"
-            android:layout_below="@+id/scroll_page"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    </com.yqman.wdiget.recyclerView.AdvanceRecycleView>
-</RelativeLayout>
+<com.yqman.wdiget.CollapsibleLayout android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id = "@+id/collapsibleLayout_main"
+                                    app:yqman_widget_content_layout = "@layout/activity_main_content"
+                                    app:yqman_widget_expanded_title_layout = "@layout/title_bar_expanded_main"
+                                    app:yqman_widget_collapsed_title_layout = "@layout/title_bar_collapsed_main"
+                                    app:yqman_widget_content_scrim_resource = "@color/colorPrimary"/>
