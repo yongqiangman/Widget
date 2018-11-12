@@ -90,18 +90,6 @@ public class CollapsibleLayout extends FrameLayout {
             /*step2：初始化折叠装填的内容*/
             final ViewStub rootView = mRootView.findViewById(R.id.collapsible_layout_collapsed_root_view);
             rootView.setLayoutResource(collapsedTitleLayoutRes);
-            rootView.setOnInflateListener(new ViewStub.OnInflateListener() {
-                @Override
-                public void onInflate(ViewStub stub, View inflated) {
-                    CollapsingToolbarLayout collapsingToolbarLayout =
-                            mRootView.findViewById(R.id.collapsible_layout_title_root_view);
-                    if(contentScrimRes != 0) {
-                        collapsingToolbarLayout.setContentScrimResource(contentScrimRes);
-                    }
-                    inflated.measure(0, 0);
-                    collapsingToolbarLayout.setMinimumHeight(inflated.getMeasuredHeight());
-                }
-            });
             mCollapsedTitleView = rootView.inflate();
             /*step3：初始化展开下的内容*/
             final ViewStub expandedView = mRootView.findViewById(R.id.collapsible_layout_expanded_root_view);
