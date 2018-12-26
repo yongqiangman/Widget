@@ -32,4 +32,15 @@
         <attr name="yqman_widget_collapsed_title_layout" format="reference"/>
         <attr name="yqman_widget_content_scrim_resource" format="reference"/>
     </declare-styleable>
+    <declare-styleable name="ScrollPickView">
+        <attr name="yqman_widget_scroll_pick_item_offset" format="integer"/>
+        <attr name="yqman_widget_scroll_pick_select_item_text_color" format="color"/>
+        <attr name="yqman_widget_scroll_pick_normal_item_text_color" format="color"/>
+        <attr name="yqman_widget_scroll_pick_select_background_color" format="color"/>
+        <attr name="yqman_widget_scroll_pick_normal_background_color" format="color"/>
+        <attr name="yqman_widget_scroll_pick_select_item_line_color" format="color"/>
+        <attr name="yqman_widget_scroll_pick_min_value" format="integer"/>
+        <attr name="yqman_widget_scroll_pick_max_value" format="integer"/>
+        <attr name="yqman_widget_scroll_pick_enable_loop" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -23,10 +23,17 @@
     <color name="yqman_widget_red">#ffff0000</color>
     <color name="yqman_widget_green">#ff00ff00</color>
     <color name="yqman_widget_gray">#ffb0b0b0</color>
+    <color name="yqman_widget_lighter_gray">#fff1f1f1</color>
     <color name="yqman_widget_dark">#ff000000</color>
     <color name="yqman_widget_transparent">#00000000</color>
     <color name="yqman_widget_white">#ffffffff</color>
     <color name="yqman_widget_button_color_dialog">#eaedf0</color>
 
     <color name="yqman_widget_color_footer_line">#D1D1D1</color>
+
+    <color name="yqman_widget_scroll_pick_selected_item_text">#000000</color>
+    <color name="yqman_widget_scroll_pick_normal_item_text">#5d594b</color>
+    <color name="yqman_widget_scroll_pick_selected_background_color">#FFFFFF</color>
+    <color name="yqman_widget_scroll_pick_normal_background_color">#FFFFFF</color>
+    <color name="yqman_widget_scroll_pick_selected_item_line_color">#fff1f1f1</color>
 </resources>
